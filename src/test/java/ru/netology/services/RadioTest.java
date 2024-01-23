@@ -71,12 +71,6 @@ public class RadioTest {
         radio.increaseVolume();
         assert radio.getVolume() == 0;
 
-    }
-
-    @Test
-    public void testIncreaseVolumeNegative() {
-        Radio radio = new Radio();
-
         radio.setVolume(150);
         radio.increaseVolume();
         assert radio.getVolume() == 150;
