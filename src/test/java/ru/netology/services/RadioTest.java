@@ -21,7 +21,7 @@ public class RadioTest {
     }
 
     @Test
-    public void testPrev(){
+    public void testPrev() {
         Radio radio = new Radio();
 
         // Проверка переключения на предыдущую станцию
@@ -36,7 +36,7 @@ public class RadioTest {
     }
 
     @Test
-    public void testSetStation(){
+    public void testSetStation() {
         Radio radio = new Radio();
 
         // Проверка установки станции в пределах допустимых значений
