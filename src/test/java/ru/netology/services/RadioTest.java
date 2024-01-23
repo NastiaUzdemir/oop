@@ -1,5 +1,6 @@
 package ru.netology.services;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class RadioTest {
@@ -17,7 +18,6 @@ public class RadioTest {
         radio.next();
         assert radio.getCurrentNumberStation() == 0;
 
-        System.out.println("Тест 'testNext' пройден успешно");
     }
 
     @Test
@@ -33,7 +33,6 @@ public class RadioTest {
         radio.prev();
         assert radio.getCurrentNumberStation() == 9;
 
-        System.out.println("Тест 'testPrev' пройден успешно");
     }
 
     @Test
@@ -44,11 +43,14 @@ public class RadioTest {
         radio.setStation(5);
         assert radio.getCurrentNumberStation() == 5;
 
+
         // Проверка установки станции за пределами допустимых значений
-        radio.setStation(15);
+        radio.setStation(10);
         assert radio.getCurrentNumberStation() == 5;
 
-        System.out.println("Тест 'testSetStation' пройден успешно");
+        radio.setStation(-10);
+        assert radio.getCurrentNumberStation() == 5;
+
     }
 
     @Test
@@ -65,7 +67,20 @@ public class RadioTest {
         }
         assert radio.getVolume() == 100;
 
-        System.out.println("Тест 'testIncreaseVolume' пройден успешно");
+        radio.setVolume(-1);
+        radio.increaseVolume();
+        assert radio.getVolume() == 0;
+
+    }
+
+    @Test
+    public void testIncreaseVolumeNegative() {
+        Radio radio = new Radio();
+
+        radio.setVolume(150);
+        radio.increaseVolume();
+        assert radio.getVolume() == 150;
+
     }
 
     @Test
@@ -82,6 +97,32 @@ public class RadioTest {
         }
         assert radio.getVolume() == 0;
 
-        System.out.println("Тест 'testDecreaseVolume' пройден успешно");
+
+        radio.setVolume(1);
+        radio.decreaseVolume();
+        int actualVolume = radio.getVolume();
+        Assertions.assertEquals(0, actualVolume);
+
+    }
+
+    @Test
+    public void testSetVolume() {
+        Radio radio = new Radio();
+
+        radio.setVolume(5);
+        int actualVolume = radio.getVolume();
+        Assertions.assertEquals(5, actualVolume);
+    }
+
+    @Test
+    public void testPrevDown() {
+
+        Radio radio = new Radio();
+        radio.setCurrentNumberStation(4);
+
+        radio.prev();
+        int actualNumberStation = radio.getCurrentNumberStation();
+
+        Assertions.assertEquals(3, actualNumberStation);
     }
 }
